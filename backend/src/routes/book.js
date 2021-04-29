@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/search', async (req, res) => {
-  const { query, page } = req.query
+  const { query, page, by } = req.query
 
   const response = await Book.findAll({
-    where: { title: { [Op.like]: `%${query}%` } },
+    where: getSearchCondition(by, query),
     include: [
       {
         model: Bookmark,
@@ -40,5 +40,20 @@ router.get('/search', async (req, res) => {
 
   res.send(response)
 })
+
+function getSearchCondition(by, query) {
+  switch (by) {
+    case 'title':
+      return { title: { [Op.like]: `%${query}%` } }
+    case 'description':
+      return { description: { [Op.like]: `%${query}%` } }
+    case 'author':
+      return { author: { [Op.like]: `%${query}%` } }
+    case 'isbn':
+      return { isbn: query }
+    default:
+      return { title: { [Op.like]: `%${query}%` } }
+  }
+}
 
 module.exports = router
