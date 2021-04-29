@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('.')
+const Bookmark = require('./bookmark')
 
 const Book = sequelize.define(
   'Book',
@@ -33,4 +34,7 @@ const Book = sequelize.define(
     timestamps: false,
   }
 )
+Book.hasOne(Bookmark, { foreignKey: 'book_id', onDelete: 'CASCADE' })
+Bookmark.belongsTo(Book, { foreignKey: 'book_id' })
+
 module.exports = Book
