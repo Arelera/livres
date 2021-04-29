@@ -1,7 +1,10 @@
+const Book = require('../models/book')
+
 const router = require('express').Router()
 
-router.get('/', (req, res) => {
-  res.send({ hey: 'yo' })
+router.get('/', async (req, res) => {
+  const books = await Book.findAll({ limit: 10 })
+  res.send(books)
 })
 
 module.exports = router
