@@ -18,15 +18,15 @@ const Book = sequelize.define(
       type: DataTypes.STRING,
     },
     isbn: {
-      type: DataTypes.INTEGER({ precision: 13 }),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: DataTypes.FLOAT({ scale: 2 }),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     image: {
-      type: DataTypes,
+      type: DataTypes.STRING,
     },
   },
   {

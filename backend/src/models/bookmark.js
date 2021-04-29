@@ -14,7 +14,7 @@ const Bookmark = sequelize.define(
       unique: true,
     },
     created_at: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
     },
   },
   { tableName: 'bookmarks', timestamps: false }
