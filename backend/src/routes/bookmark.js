@@ -1,5 +1,18 @@
 const router = require('express').Router()
+const Book = require('../models/book')
 const Bookmark = require('../models/bookmark')
+
+router.get('/', async (req, res) => {
+  const books = await Bookmark.findAll({
+    include: [
+      {
+        model: Book,
+        required: true,
+      },
+    ],
+  })
+  res.send(books)
+})
 
 router.post('/:book_id', async (req, res) => {
   const { book_id } = req.params

@@ -3,7 +3,7 @@ const sequelize = require('.')
 const Bookmark = require('./bookmark')
 
 const Book = sequelize.define(
-  'Book',
+  'book',
   {
     id: {
       type: DataTypes.INTEGER,
