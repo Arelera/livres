@@ -5,19 +5,22 @@ const Bookmark = require('../models/bookmark')
 const router = require('express').Router()
 
 router.get('/', async (req, res) => {
+  const { page } = req.query
   const books = await Book.findAll({
     include: [
       {
         model: Bookmark,
       },
     ],
+    order: [['id', 'ASC']],
     limit: 10,
+    offset: (page || 0) * 10,
   })
   res.send(books)
 })
 
 router.get('/search', async (req, res) => {
-  const { query } = req.query
+  const { query, page } = req.query
 
   const response = await Book.findAll({
     where: { title: { [Op.like]: `%${query}%` } },
@@ -26,6 +29,9 @@ router.get('/search', async (req, res) => {
         model: Bookmark,
       },
     ],
+    order: [['id', 'ASC']],
+    limit: 10,
+    offset: (page || 0) * 10,
   })
 
   if (!response.length) {

@@ -3,6 +3,7 @@ const Book = require('../models/book')
 const Bookmark = require('../models/bookmark')
 
 router.get('/', async (req, res) => {
+  const { page } = req.query
   const books = await Bookmark.findAll({
     include: [
       {
@@ -10,6 +11,9 @@ router.get('/', async (req, res) => {
         required: true,
       },
     ],
+    order: [['id', 'ASC']],
+    limit: 10,
+    offset: (page || 0) * 10,
   })
   res.send(books)
 })
