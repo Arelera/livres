@@ -1,4 +1,6 @@
-export default function Search({ query, setQuery }) {
+import SearchMenu from './SearchMenu'
+
+export default function Search({ query, setBy, setQuery }) {
   return (
     <div>
       <input
@@ -6,6 +8,7 @@ export default function Search({ query, setQuery }) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for books"
       />
+      <SearchMenu setBy={setBy} />
     </div>
   )
 }

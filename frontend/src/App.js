@@ -7,6 +7,7 @@ import Search from './components/Search'
 export default function App() {
   const dispatch = useDispatch()
   const [query, setQuery] = useState('')
+  const [by, setBy] = useState('title')
   const books = useSelector((state) => state)
 
   useEffect(() => {
@@ -16,12 +17,12 @@ export default function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (query) {
-        dispatch(search(query))
+        dispatch(search(query, by))
       }
     }, 500)
 
     return () => clearTimeout(timeout)
-  }, [query])
+  }, [dispatch, query, by])
 
   if (!books) {
     return <p>Start typing to search for books.</p>
@@ -29,7 +30,7 @@ export default function App() {
 
   return (
     <main>
-      <Search query={query} setQuery={setQuery} />
+      <Search query={query} setBy={setBy} setQuery={setQuery} />
       <BookList books={books} />
     </main>
   )
