@@ -1,7 +1,11 @@
 export default function Search({ query, setQuery }) {
   return (
     <div>
-      <input value={query} onChange={(e) => setQuery(e.target.value)} />
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search for books"
+      />
     </div>
   )
 }
