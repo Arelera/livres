@@ -2,15 +2,21 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Search from './Search'
 import BookList from './BookList'
-import { search } from '../store/actions/books'
+import { clearAll, search } from '../store/actions/books'
 import Layout from './Layout'
+import { useLocation } from 'react-router-dom'
 
 export default function Home() {
   const dispatch = useDispatch()
+  const location = useLocation()
   const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState('')
   const [by, setBy] = useState('title')
   const books = useSelector((state) => state)
+
+  useEffect(() => {
+    dispatch(clearAll())
+  }, [location])
 
   useEffect(() => {
     const timeout = setTimeout(() => {

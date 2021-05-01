@@ -10,6 +10,8 @@ export const getAll = () => {
   }
 }
 
+export const clearAll = () => ({ type: 'CLEAR_BOOKS' })
+
 export const getBookmarked = () => {
   return async (dispatch) => {
     const books = await fetch(
@@ -19,6 +21,14 @@ export const getBookmarked = () => {
     dispatch({
       type: 'GET_BOOKS',
       books,
+    })
+  }
+}
+
+export const bookmarkOne = (id) => {
+  return async (dispatch) => {
+    await fetch(`http://localhost:3001/api/bookmarks/${id}`, {
+      method: 'POST',
     })
   }
 }
