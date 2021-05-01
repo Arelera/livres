@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Search from './Search'
 import BookList from './BookList'
-import { clearAll, search } from '../store/actions/books'
+import { addMore, clearAll, search } from '../store/actions/books'
 import Layout from './Layout'
 import { useLocation } from 'react-router-dom'
 
@@ -12,17 +12,20 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState('')
   const [by, setBy] = useState('title')
+  const [page, setPage] = useState(0)
   const books = useSelector((state) => state)
 
   useEffect(() => {
     dispatch(clearAll())
-  }, [location])
+    setPage(0)
+  }, [dispatch, location])
 
   useEffect(() => {
+    setPage(0)
     const timeout = setTimeout(() => {
       if (query) {
         setIsLoading(true)
-        dispatch(search(query, by)).then(() => {
+        dispatch(search(query, by, page)).then(() => {
           setIsLoading(false)
         })
       }
@@ -30,6 +33,16 @@ export default function Home() {
 
     return () => clearTimeout(timeout)
   }, [dispatch, query, by])
+
+  useEffect(() => {
+    if (query) {
+      dispatch(addMore(query, by, page))
+    }
+  }, [dispatch, page])
+
+  const loadMoreHandler = () => {
+    setPage((oldPage) => oldPage + 1)
+  }
 
   let content
   if (!books) {
@@ -46,6 +59,7 @@ export default function Home() {
     <Layout>
       <Search query={query} setBy={setBy} setQuery={setQuery} />
       {isLoading ? <p>Loading...</p> : content}
+      <button onClick={loadMoreHandler}>Load More</button>
     </Layout>
   )
 }

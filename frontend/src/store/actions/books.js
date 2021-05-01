@@ -1,16 +1,14 @@
-export const getAll = () => {
+export const search = (query, by = 'title', page = 0) => {
   return async (dispatch) => {
-    const books = await fetch('http://localhost:3001/api/books').then((res) =>
-      res.json()
-    )
+    const books = await fetch(
+      `http://localhost:3001/api/books/search?query=${query}&by=${by}&page=${page}`
+    ).then((res) => res.json())
     dispatch({
       type: 'GET_BOOKS',
       books,
     })
   }
 }
-
-export const clearAll = () => ({ type: 'CLEAR_BOOKS' })
 
 export const getBookmarked = () => {
   return async (dispatch) => {
@@ -25,22 +23,38 @@ export const getBookmarked = () => {
   }
 }
 
-export const bookmarkOne = (id) => {
+export const addMore = (query, by, page) => {
   return async (dispatch) => {
-    await fetch(`http://localhost:3001/api/bookmarks/${id}`, {
-      method: 'POST',
+    const books = await fetch(
+      `http://localhost:3001/api/books/search?query=${query}&by=${by}&page=${page}`
+    ).then((res) => res.json())
+
+    dispatch({
+      type: 'ADD_BOOKS',
+      books,
     })
   }
 }
 
-export const search = (query, by = 'title') => {
+export const addMoreBookmarked = (page) => {
   return async (dispatch) => {
     const books = await fetch(
-      `http://localhost:3001/api/books/search?query=${query}&by=${by}`
+      `http://localhost:3001/api/bookmarks?page=${page}`
     ).then((res) => res.json())
+
     dispatch({
-      type: 'GET_BOOKS',
+      type: 'ADD_BOOKS',
       books,
+    })
+  }
+}
+
+export const clearAll = () => ({ type: 'CLEAR_BOOKS' })
+
+export const bookmarkOne = (id) => {
+  return async (dispatch) => {
+    await fetch(`http://localhost:3001/api/bookmarks/${id}`, {
+      method: 'POST',
     })
   }
 }
