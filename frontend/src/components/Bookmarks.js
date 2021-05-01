@@ -16,13 +16,9 @@ export default function Bookmarks() {
     })
   }, [dispatch])
 
-  if (isLoading) {
-    return <p>Loading</p>
-  }
-
   return (
     <Layout>
-      <BookList books={books} />
+      {isLoading ? <p>Loading...</p> : <BookList books={books} />}
     </Layout>
   )
 }
