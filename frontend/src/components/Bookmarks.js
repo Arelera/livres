@@ -25,8 +25,11 @@ export default function Bookmarks() {
 
   return (
     <Layout>
-      {isLoading ? <p>Loading...</p> : <BookList books={books} />}
-
+      {isLoading ? (
+        <p className="text-center">Loading...</p>
+      ) : (
+        <BookList books={books} />
+      )}
       <div className="py-8 text-center">
         <Button onClick={() => setPage((oldPage) => oldPage + 1)}>
           Load More
