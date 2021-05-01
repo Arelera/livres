@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { addMore, clearAll, search } from '../store/actions/books'
 import Search from './Search'
 import BookList from './BookList'
-import { addMore, clearAll, search } from '../store/actions/books'
 import Layout from './Layout'
-import { useLocation } from 'react-router-dom'
+import Button from './Button'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -46,20 +47,30 @@ export default function Home() {
 
   let content
   if (!books) {
-    content = <p>Start searchin to see results.</p>
+    content = <P className="text-center">Start typing to search for books</P>
   } else {
     if (books.length) {
-      content = <BookList books={books} />
+      content = (
+        <>
+          <BookList books={books} />
+          <div className="text-center py-8">
+            <Button onClick={loadMoreHandler}>Load More</Button>
+          </div>
+        </>
+      )
     } else {
-      content = <p>No books found.</p>
+      content = <P>No books found</P>
     }
   }
 
   return (
     <Layout>
-      <Search query={query} setBy={setBy} setQuery={setQuery} />
-      {isLoading ? <p>Loading...</p> : content}
-      <button onClick={loadMoreHandler}>Load More</button>
+      <Search query={query} by={by} setBy={setBy} setQuery={setQuery} />
+      {isLoading ? <P>Searching...</P> : content}
     </Layout>
   )
+}
+
+const P = ({ children }) => {
+  return <p className="text-center ">{children}</p>
 }

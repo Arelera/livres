@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { addMoreBookmarked, getBookmarked } from '../store/actions/books'
 import Layout from './Layout'
 import BookList from './BookList'
-import { addMoreBookmarked, getBookmarked } from '../store/actions/books'
-import { useState } from 'react'
+import Button from './Button'
 
 export default function Bookmarks() {
   const dispatch = useDispatch()
@@ -26,9 +26,12 @@ export default function Bookmarks() {
   return (
     <Layout>
       {isLoading ? <p>Loading...</p> : <BookList books={books} />}
-      <button onClick={() => setPage((oldPage) => oldPage + 1)}>
-        Load More
-      </button>
+
+      <div className="py-8 text-center">
+        <Button onClick={() => setPage((oldPage) => oldPage + 1)}>
+          Load More
+        </Button>
+      </div>
     </Layout>
   )
 }

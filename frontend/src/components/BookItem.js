@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BookmarkFilled, BookmarkOutline } from './icons'
 
 export default function BookItem({ book, bookmarkHandler }) {
   const [data, setData] = useState(
@@ -6,21 +7,28 @@ export default function BookItem({ book, bookmarkHandler }) {
   )
 
   return (
-    <li>
-      <div>
-        <img src={data.image} alt={data.title} />
+    <li className="flex shadow-md min-h-56 rounded-xl px-3 py-4">
+      <div className="h-full w-1/3 flex-shrink-0">
+        <img
+          className="object-cover h-full w-full"
+          src={data.image}
+          alt={data.title}
+        />
       </div>
-      <div>
-        <h2>{data.title}</h2>
-        <p>{data.description}</p>
-        <p>{data.author}</p>
+      <div className="flex flex-col justify-between pt-3 pl-3">
         <div>
-          <span>{data.price}$</span>
+          <h2 className="font-semibold">{data.title}</h2>
+          <p className="">{data.description}</p>
+        </div>
+        <div className="flex justify-between pt-2">
+          <span className="font-semibold">{data.price} </span>
           {data.bookmark ? (
-            <span>bookmarked</span>
+            <span className="">
+              <BookmarkFilled />
+            </span>
           ) : (
             <button onClick={() => bookmarkHandler(data, setData)}>
-              <span>not bookmarked</span>
+              {<BookmarkOutline />}
             </button>
           )}
         </div>

@@ -11,7 +11,7 @@ export default function BookList({ books }) {
   }
 
   return (
-    <ul>
+    <ul className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 pb-4">
       {books.map((book, i) => (
         <BookItem book={book} bookmarkHandler={bookmarkHandler} key={i} />
       ))}
