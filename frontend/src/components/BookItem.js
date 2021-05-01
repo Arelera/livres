@@ -1,16 +1,17 @@
 export default function BookItem({ book }) {
+  const data = book.book ? { ...book.book, bookmark: true } : book
   return (
     <li>
       <div>
-        <img src={book.image} alt={book.title} />
+        <img src={data.image} alt={data.title} />
       </div>
       <div>
-        <h2>{book.title}</h2>
-        <p>{book.description}</p>
-        <p>{book.author}</p>
+        <h2>{data.title}</h2>
+        <p>{data.description}</p>
+        <p>{data.author}</p>
         <div>
-          <span>{book.price}$</span>
-          {book.bookmark && <span> *bookmarked*</span>}
+          <span>{data.price}$</span>
+          {data.bookmark && <span> *bookmarked*</span>}
         </div>
       </div>
     </li>
