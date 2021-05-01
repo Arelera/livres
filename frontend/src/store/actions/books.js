@@ -1,7 +1,9 @@
+const baseUrl = process.env.PORT || 'http://localhost:3001'
+
 export const search = (query, by = 'title', page = 0) => {
   return async (dispatch) => {
     const books = await fetch(
-      `http://localhost:3001/api/books/search?query=${query}&by=${by}&page=${page}`
+      `${baseUrl}/api/books/search?query=${query}&by=${by}&page=${page}`
     ).then((res) => res.json())
     dispatch({
       type: 'GET_BOOKS',
@@ -12,9 +14,9 @@ export const search = (query, by = 'title', page = 0) => {
 
 export const getBookmarked = () => {
   return async (dispatch) => {
-    const books = await fetch(
-      'http://localhost:3001/api/bookmarks'
-    ).then((res) => res.json())
+    const books = await fetch(`${baseUrl}/api/bookmarks`).then((res) =>
+      res.json()
+    )
 
     dispatch({
       type: 'GET_BOOKS',
@@ -26,7 +28,7 @@ export const getBookmarked = () => {
 export const addMore = (query, by, page) => {
   return async (dispatch) => {
     const books = await fetch(
-      `http://localhost:3001/api/books/search?query=${query}&by=${by}&page=${page}`
+      `${baseUrl}/api/books/search?query=${query}&by=${by}&page=${page}`
     ).then((res) => res.json())
 
     dispatch({
@@ -39,7 +41,7 @@ export const addMore = (query, by, page) => {
 export const addMoreBookmarked = (page) => {
   return async (dispatch) => {
     const books = await fetch(
-      `http://localhost:3001/api/bookmarks?page=${page}`
+      `${baseUrl}/api/bookmarks?page=${page}`
     ).then((res) => res.json())
 
     dispatch({
@@ -53,7 +55,7 @@ export const clearAll = () => ({ type: 'CLEAR_BOOKS' })
 
 export const bookmarkOne = (id) => {
   return async (dispatch) => {
-    await fetch(`http://localhost:3001/api/bookmarks/${id}`, {
+    await fetch(`${baseUrl}/api/bookmarks/${id}`, {
       method: 'POST',
     })
   }
