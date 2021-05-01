@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 export default function Layout({ children }) {
   return (
-    <div className="containe md:w-4/5 mx-auto text-gray-800 px-4 md:px-10">
+    <div className="containe md:w-5/5 mx-auto text-gray-800 px-4 md:px-10">
       <header className="my-4">
         <h1 className="font-bold text-4xl text-center text-green-500 py-2">
           Livres
