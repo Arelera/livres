@@ -47,8 +47,6 @@ function getSearchCondition(by, query) {
       return { title: { [Op.like]: `%${query}%` } }
     case 'description':
       return { description: { [Op.like]: `%${query}%` } }
-    case 'author':
-      return { author: { [Op.like]: `%${query}%` } }
     case 'isbn':
       return { isbn: query }
     default:
