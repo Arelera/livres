@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -8,6 +9,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 app.use('/api', routes)
+
+app.use('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'build/index.html'), (err) => {
+    if (err) res.status(500).send()
+  })
+})
 
 app.listen(config.PORT, () => {
   console.log(`Listening on port: ${config.PORT}`)
