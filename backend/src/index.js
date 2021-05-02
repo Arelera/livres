@@ -10,8 +10,8 @@ app.use(express.json())
 app.use(express.static('build'))
 app.use('/api', routes)
 
-app.use('/*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'build/index.html'), (err) => {
+app.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'), (err) => {
     if (err) res.status(500).send()
   })
 })
