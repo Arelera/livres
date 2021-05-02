@@ -26,7 +26,7 @@ export default function Home() {
     const timeout = setTimeout(() => {
       if (query) {
         setIsLoading(true)
-        dispatch(search(query, by, page)).then(() => {
+        dispatch(search(query, by, 0)).then(() => {
           setIsLoading(false)
         })
       }
