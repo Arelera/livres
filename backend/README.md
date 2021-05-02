@@ -20,13 +20,13 @@ Install dependencies
 npm install
 ```
 
-The database credentials need to be stored in a `.env` file in the `/src/config` directory. The variable names should be:
+Store the database credentials in a `.env` file in the `/src/config` directory. The variable names should be:
 
 ```
-- DB=database_name
-- DB_HOST=database_host
-- DB_USERNAME=database_username
-- DB_PASSWORD=database_user_password
+DB=database_name
+DB_HOST=database_host
+DB_USERNAME=database_username
+DB_PASSWORD=database_user_password
 ```
 
 Start the project
@@ -35,7 +35,7 @@ Start the project
 npm start
 ```
 
-This will start a server on `http://localhost:3001`.
+This will start a server on `http://localhost:3001`. You can just run the app using the backend without running the frontend seperately as the backend already sends the frontend build using `express.static`.
 
 ## How to use the api
 

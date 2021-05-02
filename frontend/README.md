@@ -26,6 +26,6 @@ Start the project
 npm start
 ```
 
-Note that the frontend requires backend to be running to display any data.
+Note that the frontend requires the baseUrl in `src/store/actions/books.js` to be set to `http://localhost:3001` and the backend to be running to display any data.
 
 **Technologies:** React, Redux, Tailwind
