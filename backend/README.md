@@ -35,4 +35,27 @@ Start the project
 npm start
 ```
 
+This will start a server on `http://localhost:3001`.
+
+## How to use the api
+
+| Path                      | Description                                                  |
+| ------------------------- | ------------------------------------------------------------ |
+| `/api/books`              | Get a list of 10 books                                       |
+| Query Parameters          |                                                              |
+| `page`                    | Offset the list by page x 10                                 |
+|                           |                                                              |
+| `/api/books/search`       | Get a list of 10 books by a search query                     |
+| Query parameters          |                                                              |
+| `query`                   | The query to look for in the data                            |
+| `by`                      | What the data will be searched by (title, description, isbn) |
+| `page`                    | Offset the list by page x 10                                 |
+|                           |                                                              |
+| `/api/bookmarks`          | Get a list of 10 bookmarked books                            |
+| Query parameters          |                                                              |
+| `page`                    | Offset the list by page x 10                                 |
+|                           |                                                              |
+| `/api/bookmarks/:book_id` | Bookmarks the book with the book_id if it's not bookmarked   |
+|                           |                                                              |
+
 **Technologies:** Express, Sequelize
