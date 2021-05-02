@@ -1,4 +1,4 @@
-const baseUrl = process.env.PORT || 'http://localhost:3001'
+const baseUrl = ''
 
 export const search = (query, by = 'title', page = 0) => {
   return async (dispatch) => {
