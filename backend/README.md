@@ -55,7 +55,7 @@ This will start a server on `http://localhost:3001`. You can just run the app us
 | Query parameters          |                                                              |
 | `page`                    | Offset the list by page x 10                                 |
 |                           |                                                              |
-| `/api/bookmarks/:book_id` | Bookmarks the book with the book_id if it's not bookmarked   |
+| `POST` `/api/bookmarks/:book_id` | Bookmarks the book with the book_id if it's not bookmarked   |
 |                           |                                                              |
 
 **Technologies:** Express, Sequelize
